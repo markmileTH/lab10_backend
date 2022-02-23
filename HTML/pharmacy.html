@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+
+     <title>Document</title>
+</head>
+
+<body style="background-color: black;">
+     <div class="container mt-3" style="background-color: azure;">
+          <h2>Pharmacy</h2>
+          <div>
+               <button id="btn_newuser">เพิ่มรายการยา</button>
+          </div>
+          <table class="table table-hover">
+               <thead>
+                    <tr>
+                         <th>Pharmacy ID</th>
+                         <th>PhatmacyName</th>
+                         <th>PharmacyType</th>
+                         <th>Price</th>
+                    </tr>
+               </thead>
+               <tbody id="tuserdata">
+
+               </tbody>
+          </table>
+
+          <!-- START Modal new user  -->
+          <!-- Modal new user -->
+          <div class="modal fade" id="newUserModal" role="dialog">
+               <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                         <div class="modal-header" style="padding:35px 50px;">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4><span class="glyphicon glyphicon-user"></span> New Pharmacy</h4>
+                         </div>
+                         <div class="modal-body" style="padding:40px 50px;">
+                              <form role="form">
+                                   <div class="form-group">
+                                        <label for="usrname"><span class="glyphicon glyphicon-user"></span>
+                                             Pharmacy name</label>
+                                        <input type="text" class="form-control" id="PharmacyName"
+                                             placeholder="Enter name pharmacy">
+                                   </div>
+                                   <div class="form-group">
+                                        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>
+                                             Pharmacy Type</label>
+                                        <input type="text" class="form-control" id="PharmacyType"
+                                             placeholder="Enter pharmacy type">
+                                   </div>
+                                   <div class="form-group">
+                                        <label for="usrname"><span class="glyphicon glyphicon-user"></span>
+                                             Price</label>
+                                        <input type="text" class="form-control" id="Price" placeholder="Enter Price">
+                                        <!-- <select class="form-control" id="selauthority">
+                                             <option value="1">Admin</option>
+                                             <option value="2">Supper User</option>
+                                             <option value="3">User</option>
+                                        </select> -->
+                                   </div>
+                                   <!--                    <div class="form-group">
+                        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Active</label>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input" id="radio1" name="active_flag" value="1" > Active
+                            <label class="form-check-label" for="radio1"></label>
+                            <input type="radio" class="form-check-input" id="radio2" name="active_flag" value="0" > Non Active
+                            <label class="form-check-label" for="radio1"></label>
+                          </div>
+                    </div> -->
+                                   <button id="btn_save" type="button" class="btn btn-success btn-block"><span
+                                             class="glyphicon glyphicon-save"></span> Submit</button>
+                              </form>
+                         </div>
+                         <div class="modal-footer">
+                              <button type="submit" class="btn btn-danger btn-default pull-left"
+                                   data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+          <!--END Modal new user-->
+
+
+          <!-- Modal Edit user -->
+          <div class="modal fade" id="editUserModal" role="dialog">
+               <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                         <div class="modal-header" style="padding:35px 50px;">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4><span class="glyphicon glyphicon-user"></span> Edit Pharmacy</h4>
+                         </div>
+                         <div class="modal-body" style="padding:40px 50px;">
+                              <form role="form">
+                                   <div class="form-group">
+                                        <label for="usrname"><span class="glyphicon glyphicon-user"></span>
+                                             idPharmacy</label>
+                                        <input type="text" class="form-control" id="idPharmacy" readonly>
+                                   </div>
+                                   <div class="form-group">
+                                        <label for="usrname"><span class="glyphicon glyphicon-user"></span>
+                                             PharmacyName</label>
+                                        <input type="text" class="form-control" id="PharmacyName"
+                                             placeholder="Enter PharmacyName">
+                                   </div>
+                                   <div class="form-group">
+                                        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>
+                                             PharmacyType</label>
+                                        <input type="text" class="form-control" id="PharmacyType"
+                                             placeholder="Enter Pharmacy Type">
+                                   </div>
+                                   <div class="form-group">
+                                        <label for="usrname"><span class="glyphicon glyphicon-user"></span>
+                                             Price</label>
+                                        <input type="text" class="form-control" id="Price" placeholder="Enter Price">
+                                        <!-- <select class="form-control" id="seleauthority">
+                                             <option value="1">Admin</option>
+                                             <option value="2">Supper User</option>
+                                             <option value="3">User</option>
+                                        </select> -->
+                                   </div>
+                                   <div class="form-group">
+                                        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>
+                                             Active</label>
+                                        <div class="form-check">
+                                             <input type="radio" class="form-check-input" id="red_euser1"
+                                                  name="active_flag" value="1"> Active
+                                             <label class="form-check-label" for="radio1"></label>
+                                             <input type="radio" class="form-check-input" id="red_euser2"
+                                                  name="active_flag" value="0"> Non Active
+                                             <label class="form-check-label" for="radio1"></label>
+                                        </div>
+                                   </div>
+                                   <button id="btn_esave" type="button" class="btn btn-success btn-block"><span
+                                             class="glyphicon glyphicon-save"></span> Submit</button>
+                              </form>
+                         </div>
+                         <div class="modal-footer">
+                              <button type="submit" class="btn btn-danger btn-default pull-left"
+                                   data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+
+
+     </div>
+
+
+
+     <script>
+          function edituser(id) {
+               $.getJSON('http://localhost:3011/pharmacy/' + id, function (data, textStatus, jqXHR) {
+                    if (!data.error) {
+                         //console.log(data.data.userID);
+                         $("#idPharmacy").val(data.data.idPharmacy);
+                         $("#PharmacyName").val(data.data.PharmacyName);
+                         $("#PharmacyType").val(data.data.PharmacyType);
+                         $("#Price").val(data.data.Price);
+                         if (data.data.active_flag == 1) {
+                              $("#red_euser1").prop("checked", true);
+                              $("#red_euser2").prop("checked", false);
+                         } else {
+                              $("#red_euser1").prop("checked", false);
+                              $("#red_euser2").prop("checked", true)
+                         }
+
+                         $("#editUserModal").modal();
+                    }
+               });
+          }
+
+          function deleteuser(id) {
+               if (confirm("ต้องการลบ pharmacy รหัส " + id + "!") == true) {
+                    $.ajax({
+                         url: 'http://localhost:3011/pharmacy',
+                         type: 'DELETE',
+                         data: {
+                              idPharmacy: id,
+                         },
+                         success: function (data) {
+                              console.log(data);
+                              if (!data.error) {
+                                   alert("ลบข้อมูลเรียบร้อย");
+                              } else {
+                                   alert("เกิดข้อผิดพลาดในการลบข้อมูล");
+                              }
+                              loadUsers();
+                         }
+                    });
+               }
+          }
+
+
+          //lodeeee
+          function loadPosts() {
+               $("#tuserdata").empty();
+               // $("#main").show();
+               // $("#details").hide();
+
+               var url = "http://localhost:3011/pharmacy";
+               $.getJSON(url)
+                    .done((data) => {
+                         $.each(data, (k, item) => {
+                              console.log(item);
+                              var line = "<tr>";
+                              line += "<td>" + item.idPharmacy + "</td>";
+                              line += "<td><b>" + item.PharmacyName + "</b><br/>";
+                              line += item.PharmacyType + "</td>";
+                              line += "<td>"+item.Price+ "</td>"
+                              line += "</tr>";
+
+                              $("tuserdata").append(line);
+
+                         });
+
+                    })
+                    .fail((xhr, status, error) => {
+                    })
+          }
+
+
+
+
+
+
+          function loadUsers() {
+               $("#tuserdata").empty();
+               $.getJSON('http://localhost:3011/pharmacy', function (data, textStatus, jqXHR) {
+                    if (!data.error) {
+                         $.each(data.data, function (i, item) {
+                              $("#tuserdata").append("<tr>"
+                                   + "<td>" + item.idPharmacy + "</td>"
+                                   + "<td>" + item.PharmacyName + "</td>"
+                                   + "<td>" + item.PharmacyType + "</td>"
+                                   + "<td>" + item.Price + "</td>"
+                                   // + "<td>" + ((item.active_flag == 1) ? "active" : "non active") + "</td>"
+                                   + "<td><button type='button' class='btn btn-info' onclick='edituser(" + item.idPharmacy + ");' >Edit</button></td>"
+                                   + "<td><button type='button' class='btn btn-danger' onclick='deleteuser(" + item.idPharmacy + ");' >Delete</button></td>"
+                                   + "</tr>");
+                         });
+                    }
+               });
+          }
+
+          $(document).ready(function () {
+               // Click Add users 
+               $("#btn_newuser").click(function () {
+                    $("#newUserModal").modal();
+               });
+
+               $("#btn_save").click(function () {
+                    //let userID = ;
+                    let PharmacyName = $("#PharmacyName").val();
+                    let PharmacyType = $("#PharmacyType").val();
+                    let Price = $("#Price").val();
+                    if (PharmacyName && PharmacyType && Price) {
+                         $.post("http://localhost:3011/pharmacy",
+                              {
+                                   
+                                   PharmacyName: PharmacyName,
+                                   PharmacyType: PharmacyType,
+                                   Price: Price,
+                              },
+                              function (data, status) {
+                                   if (!data.error) {
+                                        alert("บันทึกข้อมูลเรียบร้อย");
+                                   } else {
+                                        alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+                                   }
+                                   $("#newUserModal").modal('toggle');
+                                   loadUsers();
+                              });
+                    } else {
+                         alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+                    }
+               });
+
+               $("#btn_esave").click(function () {
+                    let idPharmacy = $("#idPharmacy").val();
+                    let PharmacyName = $("#PharmacyName").val();
+                    let PharmacyType = $("#PharmacyType").val();
+                    let Price = $("#Price").val();
+                    let txtactive = "0";
+                    if ($("#red_euser1").prop("checked") == true) {
+                         txtactive = "1";
+                    }
+                    if (idPharmacy && PharmacyName && PharmacyType && Price) {
+                         $.ajax({
+                              url: 'http://localhost:3011/pharmacy',
+                              type: 'PUT',
+                              data: {
+                                   idPharmacy: idPharmacy,
+                                   PharmacyName: PharmacyName,
+                                   PharmacyType: PharmacyType,
+                                   Price: Price,
+                                   //active_flag: txtactive,
+                              },
+                              success: function (data) {
+                                   console.log(data);
+                                   if (!data.error) {
+                                        alert("บันทึกข้อมูลเรียบร้อย");
+                                   } else {
+                                        alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+                                   }
+                                   $("#editUserModal").modal('toggle');
+                                   loadUsers();
+                              }
+                         });
+                    } else {
+                         alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+                    }
+               });
+               loadUsers();
+          });
+
+          //loadPosts();
+
+     </script>
+</body>
+
+</html>
